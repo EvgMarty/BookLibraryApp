@@ -16,7 +16,7 @@
   }
 }
 
-.logo{
+.logo {
   width: 43px;
 
   @media (max-width: 530px) {
@@ -35,4 +35,26 @@
   @media (max-width: 530px) {
     font-size: 30px;
   }
+}
+
+.appMain {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.leftColumn {
+  flex: 1;
+  flex-basis: 35%;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.rightColumn {
+  flex: 1;
+  flex-basis: 65%;
+  display: flex;
+  flex-direction: column;
 }
