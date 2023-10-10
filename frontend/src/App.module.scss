@@ -1,0 +1,38 @@
+.app {
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #212529;
+  box-shadow: 0px 1px 8px 0px #212529;
+
+  @media (max-width: 530px) {
+    gap: 10px;
+    padding: 15px;
+  }
+}
+
+.logo{
+  width: 43px;
+
+  @media (max-width: 530px) {
+    width: 28px;
+  }
+}
+
+.headerText {
+  font-family: 'Pixelify Sans';
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 84px */
+  letter-spacing: -0.5px;
+
+  @media (max-width: 530px) {
+    font-size: 30px;
+  }
+}
