@@ -1,8 +1,14 @@
 import styles from './BookList.module.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletedBook } from '../../redux/books/actionCreators';
 
 const BookList = () => {
   const books = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+
+  const handlerDeleteBook = (id) => {
+    dispatch(deletedBook(id));
+  };
 
   return (
     <div className={styles.appBlock}>
@@ -15,8 +21,16 @@ const BookList = () => {
             {books.map((book, i) => {
               return (
                 <li key={book.id}>
-                  {++i}. {book.title} by{' '}
-                  <span className={styles.author}>{book.author}</span>
+                  <div>
+                    {++i}. {book.title} by{' '}
+                    <span className={styles.author}>{book.author}</span>
+                  </div>
+                  <button
+                    className={styles.deletBtn}
+                    onClick={() => handlerDeleteBook(book.id)}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}

@@ -14,12 +14,16 @@
   flex-direction: column;
   row-gap: 15px;
   li {
+    display: flex;
+    transition: all 0.2s ease-in-out;
+    align-items: center;
+    justify-content: space-between;
     color: #6c757d;
     font-size: 22px;
     cursor: pointer;
     text-align: left;
     border-radius: 6px;
-    padding: 15px;
+    padding: 15px 25px;
     background: #f8f9fa;
 
     &:nth-child(even) {
@@ -31,6 +35,20 @@
 
     .author {
       color: #343a40;
+    }
+  }
+
+  .deletBtn {
+    transition: all 0.2s ease-in-out;
+    color: #cf2a2a;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    border: 2px solid #cf2a2a;
+
+    &:hover {
+      background: #ffacac;
     }
   }
 }
