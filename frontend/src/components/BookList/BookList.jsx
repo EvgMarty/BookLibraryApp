@@ -14,7 +14,7 @@ const BookList = () => {
           <ul className={styles.booksWrap}>
             {books.map((book, i) => {
               return (
-                <li key={i}>
+                <li key={book.id}>
                   {++i}. {book.title} by{' '}
                   <span className={styles.author}>{book.author}</span>
                 </li>
