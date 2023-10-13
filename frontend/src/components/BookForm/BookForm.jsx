@@ -19,6 +19,7 @@ const BookForm = () => {
         title,
         author,
         id: uuidv4(),
+        isFavorite: false,
       };
 
       dispatch(addBook(book));
@@ -32,11 +33,15 @@ const BookForm = () => {
   const handleAddRandomBook = () => {
     //получаем рандомное число  в зависимости от длины масива booksData
     const randomIndex = Math.floor(Math.random() * booksData.length);
-     //Выбираем из масива одну книгу в зависимости от рандомного числа
+    //Выбираем из масива одну книгу в зависимости от рандомного числа
     const randomBooks = booksData[randomIndex];
-     // Добавляем айди к выбраной книге
-    const randomBooksWithId = { ...randomBooks, id: uuidv4() };
-    
+    // Добавляем айди к выбраной книге
+    const randomBooksWithId = {
+      ...randomBooks,
+      id: uuidv4(),
+      isFavorite: false,
+    };
+
     dispatch(addBook(randomBooksWithId));
   };
 

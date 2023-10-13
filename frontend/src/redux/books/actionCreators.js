@@ -14,4 +14,9 @@ export const deletedBook = (id) => {
   };
 };
 
-
+export const toggleFavorite = (id) => {
+  return {
+    type: actionTypes.TOGGLE_FAVORITE,
+    payload: id,
+  };
+};

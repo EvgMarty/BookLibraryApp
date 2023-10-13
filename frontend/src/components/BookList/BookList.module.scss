@@ -19,12 +19,13 @@
   row-gap: 15px;
   li {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
     transition: all 0.2s ease-in-out;
     align-items: center;
     justify-content: space-between;
     color: #6c757d;
-    font-size: 22px;
-    cursor: pointer;
+    font-size: 18px;
     text-align: left;
     border-radius: 6px;
     padding: 15px 25px;
@@ -42,10 +43,29 @@
     }
   }
 
+  .btnWrap {
+    display: flex;
+    column-gap: 6px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .togleFavorit {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 40px;
+    height: 40px;
+    color: #e2d300;
+  }
+
   .deletBtn {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: center;
     transition: all 0.2s ease-in-out;
     color: #cf2a2a;
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px 15px;
     border-radius: 6px;
     background: #f8f9fa;
