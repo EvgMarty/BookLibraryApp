@@ -15,7 +15,7 @@ const BookList = () => {
       <h2>Book List</h2>
       <div>
         {books.length === 0 ? (
-          <p>There isn't a single book.</p>
+          <p className={styles.noneBooks}>Booklist is empty.</p>
         ) : (
           <ul className={styles.booksWrap}>
             {books.map((book, i) => {

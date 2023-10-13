@@ -2,6 +2,7 @@ import styles from './BookForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import booksData from '../../data/books.json';
 import { addBook } from '../../redux/books/actionCreators';
 
 const BookForm = () => {
@@ -9,6 +10,7 @@ const BookForm = () => {
   const [author, setAuthor] = useState('');
   const dispatch = useDispatch();
 
+  //Отправка кнги в стор
   const handlerSubmit = (e) => {
     e.preventDefault();
 
@@ -24,6 +26,18 @@ const BookForm = () => {
       setTitle('');
       setAuthor('');
     }
+  };
+
+  //Добавление рандомной книги в stor
+  const handleAddRandomBook = () => {
+    //получаем рандомное число  в зависимости от длины масива booksData
+    const randomIndex = Math.floor(Math.random() * booksData.length);
+     //Выбираем из масива одну книгу в зависимости от рандомного числа
+    const randomBooks = booksData[randomIndex];
+     // Добавляем айди к выбраной книге
+    const randomBooksWithId = { ...randomBooks, id: uuidv4() };
+    
+    dispatch(addBook(randomBooksWithId));
   };
 
   return (
@@ -54,9 +68,18 @@ const BookForm = () => {
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
-        <button className={styles.btn} type="submit">
-          Add Book
-        </button>
+        <div className={styles.btnWrap}>
+          <button className={styles.btn} type="submit">
+            Add Book
+          </button>
+          <button
+            className={styles.btn}
+            type="button"
+            onClick={handleAddRandomBook}
+          >
+            Add Random
+          </button>
+        </div>
       </form>
     </div>
   );
