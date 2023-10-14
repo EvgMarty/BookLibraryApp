@@ -25,7 +25,7 @@
     align-items: center;
     justify-content: space-between;
     color: #6c757d;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
     border-radius: 6px;
     padding: 15px 25px;
@@ -51,10 +51,12 @@
   }
 
   .togleFavorit {
+    margin-top: 2px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    width: 40px;
-    height: 40px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
     color: #e2d300;
   }
 
@@ -65,7 +67,7 @@
     justify-content: center;
     transition: all 0.2s ease-in-out;
     color: #cf2a2a;
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px 15px;
     border-radius: 6px;
     background: #f8f9fa;

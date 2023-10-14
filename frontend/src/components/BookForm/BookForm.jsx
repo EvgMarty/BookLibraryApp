@@ -1,7 +1,7 @@
 import styles from './BookForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import createBookWhithId from '../../utils/createBooksWithId';
 import booksData from '../../data/books.json';
 import { addBook } from '../../redux/books/actionCreators';
 
@@ -15,12 +15,7 @@ const BookForm = () => {
     e.preventDefault();
 
     if (title && author) {
-      const book = {
-        title,
-        author,
-        id: uuidv4(),
-        isFavorite: false,
-      };
+      const book = createBookWhithId({ title, author });
 
       dispatch(addBook(book));
 
@@ -35,12 +30,8 @@ const BookForm = () => {
     const randomIndex = Math.floor(Math.random() * booksData.length);
     //Выбираем из масива одну книгу в зависимости от рандомного числа
     const randomBooks = booksData[randomIndex];
-    // Добавляем айди к выбраной книге
-    const randomBooksWithId = {
-      ...randomBooks,
-      id: uuidv4(),
-      isFavorite: false,
-    };
+    //Функция добавляющая йд и исфафорит
+    const randomBooksWithId = createBookWhithId(randomBooks);
 
     dispatch(addBook(randomBooksWithId));
   };
