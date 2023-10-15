@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   title: '',
+  author: '',
+  onlyFavorit: false,
 };
 
 const filterSlice = createSlice({
@@ -11,15 +13,30 @@ const filterSlice = createSlice({
     setTitleFilter: (state, action) => {
       return { ...state, title: action.payload };
     },
-    resetFilters: (state) => {
-      return { ...initialState };
+    setAuthorFilter: (state, action) => {
+      return { ...state, author: action.payload };
+    },
+    setOnlyFavoritFilter: (state) => {
+      return { ...state, onlyFavorit: !state.onlyFavorit };
+    },
+    resetFilters: () => {
+      return initialState;
     },
   },
 });
 
-//Выбор определенной части состояние
+//Выбор определенной части состояние на селекторы
 export const selectTitleFilter = (state) => state.filter.title;
+export const selectAuthorFilter = (state) => state.filter.author;
+export const selecOnlyFavoritFilter = (state) => state.filter.onlyFavorit;
 
-export const { setTitleFilter, resetFilters } = filterSlice.actions;
+//на диспатчи
+export const {
+  setTitleFilter,
+  setAuthorFilter,
+  setOnlyFavoritFilter,
+  resetFilters,
+} = filterSlice.actions;
 
+//на стор
 export default filterSlice.reducer;

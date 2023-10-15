@@ -19,7 +19,7 @@
   row-gap: 15px;
   li {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     row-gap: 10px;
     transition: all 0.2s ease-in-out;
     align-items: center;
@@ -30,6 +30,10 @@
     border-radius: 6px;
     padding: 15px 25px;
     background: #f8f9fa;
+
+    @media (max-width: 810px) {
+      flex-direction: column;
+    }
 
     &:nth-child(even) {
       background-color: #e9ecef;

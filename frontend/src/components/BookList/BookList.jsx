@@ -1,29 +1,42 @@
 import styles from './BookList.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletedBook, toggleFavorite } from '../../redux/books/actionCreators';
-import { selectTitleFilter } from '../../redux/slices/filterSlice';
+import {
+  selectTitleFilter,
+  selectAuthorFilter,
+  selecOnlyFavoritFilter,
+} from '../../redux/slices/filterSlice';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { BsBookmarkStar, BsBookmarkStarFill } from 'react-icons/bs';
 
 const BookList = () => {
+  const dispatch = useDispatch();
+
+  //Селекторы
   const books = useSelector((state) => state.books);
   const titleFilter = useSelector(selectTitleFilter);
-  const dispatch = useDispatch();
-  //Отправка айд при нажатии на кнопку удалить
+  const authorFilter = useSelector(selectAuthorFilter);
+  const onlyFavoritFilter = useSelector(selecOnlyFavoritFilter);
+
+  //Диспатчи
   const handlerDeleteBook = (id) => {
     dispatch(deletedBook(id));
   };
-  //Отправка айд при нажатии на кнопку фаворит
+
   const handlerToggleFavorit = (id) => {
     dispatch(toggleFavorite(id));
   };
 
-  //создаем новый масив  прошедший фильтрацию по тайтлу
+  //создаем новый масив  прошедший фильтрацию по тайтлу и автору
   const filteredBooks = books.filter((book) => {
     const matchesTitle = book.title
       .toLowerCase()
       .includes(titleFilter.toLowerCase());
-    return matchesTitle;
+    const matchesAuthor = book.author
+      .toLowerCase()
+      .includes(authorFilter.toLowerCase());
+    const matchesFavorite = onlyFavoritFilter ? book.isFavorite : true;
+    return matchesTitle && matchesAuthor && matchesFavorite;
   });
 
   return (
