@@ -1,13 +1,14 @@
 import styles from './BookList.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletedBook, toggleFavorite } from '../../redux/books/actionCreators';
+import { selectTitleFilter } from '../../redux/slices/filterSlice';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { BsBookmarkStar, BsBookmarkStarFill } from 'react-icons/bs';
 
 const BookList = () => {
   const books = useSelector((state) => state.books);
+  const titleFilter = useSelector(selectTitleFilter);
   const dispatch = useDispatch();
-
   //Отправка айд при нажатии на кнопку удалить
   const handlerDeleteBook = (id) => {
     dispatch(deletedBook(id));
@@ -17,6 +18,14 @@ const BookList = () => {
     dispatch(toggleFavorite(id));
   };
 
+  //создаем новый масив  прошедший фильтрацию по тайтлу
+  const filteredBooks = books.filter((book) => {
+    const matchesTitle = book.title
+      .toLowerCase()
+      .includes(titleFilter.toLowerCase());
+    return matchesTitle;
+  });
+
   return (
     <div className={styles.appBlock}>
       <h2>Book List</h2>
@@ -25,7 +34,7 @@ const BookList = () => {
           <p className={styles.noneBooks}>Booklist is empty.</p>
         ) : (
           <ul className={styles.booksWrap}>
-            {books.map((book, i) => {
+            {filteredBooks.map((book, i) => {
               return (
                 <li key={book.id}>
                   <div>

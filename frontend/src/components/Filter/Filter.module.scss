@@ -7,3 +7,31 @@
   text-align: center;
   box-shadow: 0px 5px 35px 0px #343a40;
 }
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.input {
+  color: #343a40;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 20px;
+  border: solid 2px #f8f9fa;
+  &:focus {
+    border: solid 2px #343a40;
+  }
+}
+
+.btn {
+  color: #e9ecef;
+  background: #343a40;
+  padding: 12px;
+  font-size: 20px;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
