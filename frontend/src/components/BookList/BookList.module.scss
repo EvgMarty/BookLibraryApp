@@ -31,6 +31,10 @@
     padding: 15px 25px;
     background: #f8f9fa;
 
+    .highLight {
+      background-color: #ff0;
+    }
+
     @media (max-width: 810px) {
       flex-direction: column;
     }

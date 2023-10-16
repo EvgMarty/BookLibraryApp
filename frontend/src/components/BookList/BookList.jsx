@@ -1,11 +1,12 @@
 import styles from './BookList.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { deletedBook, toggleFavorite } from '../../redux/books/actionCreators';
+import { deletedBook, toggleFavorite } from '../../redux/slices/booksSlice';
 import {
   selectTitleFilter,
   selectAuthorFilter,
   selecOnlyFavoritFilter,
 } from '../../redux/slices/filterSlice';
+import { selectBooks } from '../../redux/slices/booksSlice';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { BsBookmarkStar, BsBookmarkStarFill } from 'react-icons/bs';
 
@@ -13,7 +14,7 @@ const BookList = () => {
   const dispatch = useDispatch();
 
   //Селекторы
-  const books = useSelector((state) => state.books);
+  const books = useSelector(selectBooks);
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
   const onlyFavoritFilter = useSelector(selecOnlyFavoritFilter);
@@ -39,6 +40,24 @@ const BookList = () => {
     return matchesTitle && matchesAuthor && matchesFavorite;
   });
 
+  //Подсветка текста
+  const highLightMatch = (text, filter) => {
+    if (!filter) return text;
+
+    const regexp = new RegExp(`(${filter})`, 'gi');
+
+    return text.split(regexp).map((subString, i) => {
+      if (subString.toLowerCase() === filter.toLowerCase()) {
+        return (
+          <span key={i} className={styles.highLight}>
+            {subString}
+          </span>
+        );
+      }
+      return subString;
+    });
+  };
+
   return (
     <div className={styles.appBlock}>
       <h2>Book List</h2>
@@ -51,8 +70,10 @@ const BookList = () => {
               return (
                 <li key={book.id}>
                   <div>
-                    {++i}. {book.title} by{' '}
-                    <span className={styles.author}>{book.author}</span>
+                    {++i}. {highLightMatch(book.title, titleFilter)} by{' '}
+                    <span className={styles.author}>
+                      {highLightMatch(book.author, authorFilter)}
+                    </span>
                   </div>
                   <div className={styles.btnWrap}>
                     <span onClick={() => handlerToggleFavorit(book.id)}>

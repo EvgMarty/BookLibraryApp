@@ -1,9 +1,9 @@
 import styles from './BookForm.module.scss';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import createBookWhithId from '../../utils/createBooksWithId';
 import booksData from '../../data/books.json';
-import { addBook } from '../../redux/books/actionCreators';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addBook } from '../../redux/slices/booksSlice';
+import createBookWhithId from '../../utils/createBooksWithId';
 
 const BookForm = () => {
   const [title, setTitle] = useState('');
