@@ -12,6 +12,10 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 810px) {
+    flex-direction: column;
+  }
 }
 
 .inputGroup {

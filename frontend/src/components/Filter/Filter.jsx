@@ -55,9 +55,10 @@ const Filter = () => {
         />
       </div>
       <div className={styles.inputGroup}>
-        <label htmlFor="">
+        <label htmlFor="favorit">
           Only Favorit
           <input
+            id="favorit"
             type="checkbox"
             checked={onlyFavoritFilter}
             onChange={handleOnlyFavoriteFiltreChange}
