@@ -61,7 +61,7 @@ const BookList = () => {
   return (
     <div className={styles.appBlock}>
       <h2>Book List</h2>
-      <div >
+      <div>
         {books.length === 0 ? (
           <p className={styles.noneBooks}>Booklist is empty.</p>
         ) : (
@@ -73,14 +73,21 @@ const BookList = () => {
                     {++i}. {highLightMatch(book.title, titleFilter)} by{' '}
                     <span className={styles.author}>
                       {highLightMatch(book.author, authorFilter)}
-                    </span>
+                    </span>{' '}
+                    ({book.source})
                   </div>
                   <div className={styles.btnWrap}>
                     <span onClick={() => handlerToggleFavorit(book.id)}>
                       {book.isFavorite ? (
-                        <BsBookmarkStarFill title="favorit" className={styles.togleFavorit} />
+                        <BsBookmarkStarFill
+                          title="favorit"
+                          className={styles.togleFavorit}
+                        />
                       ) : (
-                        <BsBookmarkStar title="favorit" className={styles.togleFavorit} />
+                        <BsBookmarkStar
+                          title="favorit"
+                          className={styles.togleFavorit}
+                        />
                       )}
                     </span>
 

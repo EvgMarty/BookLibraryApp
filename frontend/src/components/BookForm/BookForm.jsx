@@ -2,6 +2,7 @@ import styles from './BookForm.module.scss';
 import booksData from '../../data/books.json';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import { addBook } from '../../redux/slices/booksSlice';
 import createBookWhithId from '../../utils/createBooksWithId';
 
@@ -15,7 +16,7 @@ const BookForm = () => {
     e.preventDefault();
 
     if (title && author) {
-      const book = createBookWhithId({ title, author });
+      const book = createBookWhithId({ title, author }, 'manual');
 
       dispatch(addBook(book));
 
@@ -31,9 +32,21 @@ const BookForm = () => {
     //Выбираем из масива одну книгу в зависимости от рандомного числа
     const randomBooks = booksData[randomIndex];
     //Функция добавляющая йд и исфафорит
-    const randomBooksWithId = createBookWhithId(randomBooks);
+    const randomBooksWithId = createBookWhithId(randomBooks, 'random');
 
     dispatch(addBook(randomBooksWithId));
+  };
+
+  //Добавление рандомной книги c получением API
+  const handleAddRandomBookVieApi = async () => {
+    try {
+      const res = await axios.get('http://localhost:4000/random-book');
+      if (res?.data?.title && res?.data?.author) {
+        dispatch(addBook(createBookWhithId(res.data, 'API')));
+      }
+    } catch (error) {
+      console.log('Errror faching random book', error);
+    }
   };
 
   return (
@@ -74,6 +87,13 @@ const BookForm = () => {
             onClick={handleAddRandomBook}
           >
             Add Random
+          </button>
+          <button
+            className={styles.btn}
+            type="submit"
+            onClick={handleAddRandomBookVieApi}
+          >
+            Add Random vie API
           </button>
         </div>
       </form>
