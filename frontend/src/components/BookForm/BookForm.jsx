@@ -2,8 +2,7 @@ import styles from './BookForm.module.scss';
 import booksData from '../../data/books.json';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { addBook } from '../../redux/slices/booksSlice';
+import { addBook, fechBook } from '../../redux/slices/booksSlice';
 import createBookWhithId from '../../utils/createBooksWithId';
 
 const BookForm = () => {
@@ -39,14 +38,7 @@ const BookForm = () => {
 
   //Добавление рандомной книги c получением API
   const handleAddRandomBookVieApi = async () => {
-    try {
-      const res = await axios.get('http://localhost:4000/random-book');
-      if (res?.data?.title && res?.data?.author) {
-        dispatch(addBook(createBookWhithId(res.data, 'API')));
-      }
-    } catch (error) {
-      console.log('Errror faching random book', error);
-    }
+    dispatch(fechBook());
   };
 
   return (
