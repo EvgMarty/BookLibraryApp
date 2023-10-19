@@ -1,5 +1,6 @@
 import styles from './BookForm.module.scss';
 import booksData from '../../data/books.json';
+import { FaSpinner } from 'react-icons/fa';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook, fechBook } from '../../redux/slices/booksSlice';
@@ -9,6 +10,7 @@ import { setError } from '../../redux/slices/errorSlice';
 const BookForm = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
+  const [isLoadind, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   //Отправка кнги в стор
@@ -39,7 +41,12 @@ const BookForm = () => {
 
   //Добавление рандомной книги c получением API
   const handleAddRandomBookVieApi = async () => {
-    dispatch(fechBook('http://localhost:4000/random-book'));
+    try {
+      setIsLoading(true);
+      await dispatch(fechBook('http://localhost:4000/random-book-delayed'));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,9 +91,17 @@ const BookForm = () => {
           <button
             className={styles.btn}
             type="button"
+            disabled={isLoadind}
             onClick={handleAddRandomBookVieApi}
           >
-            Add Random vie API
+            {isLoadind ? (
+              <>
+                <FaSpinner className={styles.spinner} />
+                <span>Loading...</span>
+              </>
+            ) : (
+              'Add Random vie API'
+            )}
           </button>
         </div>
       </form>
