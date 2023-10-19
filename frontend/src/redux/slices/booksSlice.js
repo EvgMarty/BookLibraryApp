@@ -36,6 +36,7 @@ const booksSlice = createSlice({
       );
     },
   },
+  //OPTION 1
   extraReducers: (builder) => {
     builder.addCase(fechBook.fulfilled, (state, action) => {
       if (action.payload.title && action.payload.author) {
@@ -43,6 +44,14 @@ const booksSlice = createSlice({
       }
     });
   },
+  // //OPTION 2
+  // extraReducers: {
+  //   [fechBook.fulfilled]: (state, action) => {
+  //     if (action.payload.title && action.payload.author) {
+  //       return [...state, createBookWhithId(action.payload, 'API')];
+  //     }
+  //   },
+  // },
 });
 
 //Выбор определенной части состояние на селекторы
