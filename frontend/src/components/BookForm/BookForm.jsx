@@ -39,7 +39,7 @@ const BookForm = () => {
 
   //Добавление рандомной книги c получением API
   const handleAddRandomBookVieApi = async () => {
-    dispatch(fechBook());
+    dispatch(fechBook('http://localhost:4000/random-book'));
   };
 
   return (
@@ -83,7 +83,7 @@ const BookForm = () => {
           </button>
           <button
             className={styles.btn}
-            type="submit"
+            type="button"
             onClick={handleAddRandomBookVieApi}
           >
             Add Random vie API

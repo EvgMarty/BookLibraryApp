@@ -1,12 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import createBookWhithId from '../../utils/createBooksWithId';
+import { setError } from './errorSlice';
 const initialState = [];
 
-export const fechBook = createAsyncThunk('books/fechBook', async () => {
-  const res = await axios.get('http://localhost:5000/random-book');
-  return res.data;
-});
+//Получение книги по API
+export const fechBook = createAsyncThunk(
+  'books/fechBook',
+  async (url, thunkAPI) => {
+    try {
+      const res = await axios.get(url);
+      return res.data;
+    } catch (error) {
+      thunkAPI.dispatch(setError(error.message));
+      throw error;
+    }
+  }
+);
 
 const booksSlice = createSlice({
   name: ' books',
@@ -31,9 +41,6 @@ const booksSlice = createSlice({
       if (action.payload.title && action.payload.author) {
         return [...state, createBookWhithId(action.payload, 'API')];
       }
-    });
-    builder.addCase(fechBook.rejected, (state, action) => {
-      console.log(action);
     });
   },
 });
